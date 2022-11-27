@@ -145,6 +145,12 @@ def variance(list):
 def standard_deviation(list):#ecart-type
     return sqrt(variance(list))
 
+def mult_list(list, mult):
+    for i in range(len(list)):
+        list[i] *= mult
+    return list
+
+
 
         
 

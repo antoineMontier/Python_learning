@@ -1,0 +1,5 @@
+Hey, my name is Antoine Montier,
+i'm trying to read this file 
+later on, i will write in it
+python seems easier and more powerfull than c and java
+this is the end of my txt file
