@@ -1,4 +1,4 @@
-
+import Point
 from math import sqrt
 
 
@@ -158,7 +158,6 @@ def mult_list(list, mult):
 
 print("\n\n")
 
-print(  standard_deviation([0, 1/21, 2/21, 3/21, 4/21, 5/21, 6/21])  )
 
 print("\n\n")
 
