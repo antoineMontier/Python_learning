@@ -1,4 +1,6 @@
 
+from math import sqrt
+
 
 def printDoubleTable(list):
     #assert isinstance(list, int[][])
@@ -125,10 +127,23 @@ def bubble_sort(list):
                 list[j], list[j+1] = list[j+1], list[j]
     return list
             
-
+def isPresent(list, x):
+    for i in range(len(list)):
+        if(list[i] == x):
+            return True
+    return False
         
+def esperance(list, power):
+    x = 0
+    for i in range(len(list)):
+        x += pow(i, power) *list[i]
+    return x
 
-    
+def variance(list):
+    return esperance(list, 2) - esperance(list, 1)*esperance(list, 1)
+
+def standard_deviation(list):#ecart-type
+    return sqrt(variance(list))
 
 
         
@@ -137,7 +152,7 @@ def bubble_sort(list):
 
 print("\n\n")
 
-print(  bubble_sort([7, 9, 2, 6, 7, 11, -1])  )
+print(  standard_deviation([0, 1/21, 2/21, 3/21, 4/21, 5/21, 6/21])  )
 
 print("\n\n")
 
