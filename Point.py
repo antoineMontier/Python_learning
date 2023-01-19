@@ -41,17 +41,3 @@ class Point:
         return sqrt((self._x - p.get_x())*(self._x - p.get_x()) + (self._y - p.get_y())*(self._y - p.get_y()))
 
 
-a = Point(12, 5)
-b = Point(10, 5)
-
-print("a =", a, "\nb =", b)
-print("a+b =", a+b)
-print("a-b =", a-b)
-
-print("a*b =", a*b)
-print("a/b =", a/b)
-
-print("a == b :", a == b)
-
-print("dist :", a.distance(b))
-

@@ -1,4 +1,5 @@
-import Point
+from Point import *
+from parse import *
 from math import sqrt
 
 
@@ -154,10 +155,15 @@ def mult_list(list, mult):
 
         
 
-
+def parse_number(text):
+    return float(text)
 
 print("\n\n")
 
+exp="36x6"
+tab = parse("{a:Number}x{b:Number}", exp, dict(Number=parse_number))
+
+print(tab)
 
 print("\n\n")
 
