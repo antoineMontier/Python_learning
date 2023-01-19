@@ -6,4 +6,11 @@ function openADB(){
     adb shell #open adb command prompt
 }
 
-openADB 
+#disconnect
+function closeADB(){
+    exit # exit adb command prompt
+    adb disconnect $1:5555
+}
+
+
+openADB $*
