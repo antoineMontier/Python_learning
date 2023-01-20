@@ -1,4 +1,4 @@
-import pyautogui, time, os, subprocess, cv2, pyperclip
+import pyautogui, time, os, subprocess, cv2, pyperclip, pytesseract
 
 def open_adb():
     ip_adress = str(input("what is the Ip adress or your android device ?"))
@@ -29,10 +29,38 @@ def enter_likedSongs():
     subprocess.run(["adb", "shell", "input", "text", "Liked"])
     subprocess.run(["adb", "shell", "input", "keyevent", "62"]) # Space key
     subprocess.run(["adb", "shell", "input", "text", "songs"])
+    time.sleep(.2)
+    subprocess.run(["adb", "shell", "input", "tap", '500', '550'])
+
+def read_onScreen():
+    import subprocess
+
+    result = subprocess.run(["adb", "shell", "dumpsys", "accessibility"], stdout=subprocess.PIPE)
+    output = result.stdout.decode()
+
+    # Extract the content of the current focused element
+    if "mFocusedNode:" in output and "mText:" in output and "mTextSelectionEnd" in output:
+        content = output.split("mFocusedNode:")[1].split("mText:")[1].split("mTextSelectionEnd")[0].strip()
+        print(content)
+    else:
+        print("mFocusedNode, mText or mTextSelectionEnd not found in the output")
+
+def screenshot():
+    subprocess.run(["adb", "shell", "screencap", "-p", "/sdcard/screenshot.png"])
+    subprocess.run(["adb", "pull", "/sdcard/screenshot.png", "."])
 
 
+def read_screenshot(output_file):
+    image = cv2.imread("screenshot.png")
+    text = pytesseract.image_to_string(image, lang='eng', config='--psm 11')
+    with open(str(output_file), "w") as file:
+        file.write(text)
 
 #open_adb()
 #open_spotify()
 #time.sleep(5)
-enter_likedSongs()
+#enter_likedSongs()
+#time.sleep(.5)
+#read_onScreen()
+#screenshot()
+read_screenshot("titles.txt")
