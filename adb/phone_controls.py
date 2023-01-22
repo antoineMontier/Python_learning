@@ -56,11 +56,31 @@ def read_screenshot(output_file):
     with open(str(output_file), "w") as file:
         file.write(text)
 
+def choose_music():
+    subprocess.run(["adb", "shell", "input", "tap", '500', '1600'])
+
+def clean_results(file_in, file_out):
+    with open(str(file_in) + ".txt", "r") as I:
+        with open(str(file_out) + ".txt", "w") as W:
+            for line in I:
+                # Remove leading and trailing white spaces
+                line = line.strip()
+                # Check if the line contains only "oo"
+                if len(line) < 4:
+                    continue
+                if "®" in line or "Home" in line or "Your Library" in line or "Search" in line:
+                    continue
+                line = line.replace("\"", "").replace("“", "").replace("»", "").replace(")", "").replace("@", "").replace("<", "").replace(">", "").replace("(", "").replace("{", "").replace("}", "").replace("Gees", "").replace("[", "").replace("[", "").replace("]", "").replace("[", "").replace("*", "").replace(".", "").replace("|", "")
+                # Write the line to the output file
+                W.write(line + '\n')
+
 #open_adb()
 #open_spotify()
-#time.sleep(5)
+#time.sleep(6)
 #enter_likedSongs()
 #time.sleep(.5)
 #read_onScreen()
 #screenshot()
-read_screenshot("titles.txt")
+#read_screenshot("titles.txt")
+#choose_music()
+clean_results("titles", "Titles")
