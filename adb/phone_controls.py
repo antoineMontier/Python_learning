@@ -59,20 +59,28 @@ def read_screenshot(output_file):
 def choose_music():
     subprocess.run(["adb", "shell", "input", "tap", '500', '1600'])
 
+## double-call
 def clean_results(file_in, file_out):
     with open(str(file_in) + ".txt", "r") as I:
         with open(str(file_out) + ".txt", "w") as W:
             for line in I:
                 # Remove leading and trailing white spaces
                 line = line.strip()
-                # Check if the line contains only "oo"
                 if len(line) < 4:
                     continue
                 if "®" in line or "Home" in line or "Your Library" in line or "Search" in line:
                     continue
-                line = line.replace("\"", "").replace("“", "").replace("»", "").replace(")", "").replace("@", "").replace("<", "").replace(">", "").replace("(", "").replace("{", "").replace("}", "").replace("Gees", "").replace("[", "").replace("[", "").replace("]", "").replace("[", "").replace("*", "").replace(".", "").replace("|", "")
-                # Write the line to the output file
+                line = line.replace("\"", "").replace("“", "").replace("»", "").replace(")", "").replace("@", "").replace("<", "").replace(">", "").replace("(", "").replace("{", "").replace("}", "").replace("Gees", "").replace("[", "").replace("[", "").replace("]", "").replace("[", "").replace("*", "").replace(".", "").replace("|", "").replace("an ", "").replace("[", "").replace("AN ", "").replace("An ", "").replace("aN ", "")
+                if line[1] == " ":
+                    line = line[1:]
+                elif line[2] == " ":
+                    line = line[2:]
+                elif line[3] == " ":
+                    line = line[3:]
+                line.strip()
                 W.write(line + '\n')
+
+
 
 #open_adb()
 #open_spotify()
@@ -83,4 +91,7 @@ def clean_results(file_in, file_out):
 #screenshot()
 #read_screenshot("titles.txt")
 #choose_music()
-clean_results("titles", "Titles")
+#clean_results("titles", "Titles")
+#clean_results("Titles", "Titles2")
+os.chdir('/home/antoine/Prog/python/first/adb/music')
+subprocess.run(['spotdl', 'download', 'https://open.spotify.com/track/5qaEfEh1AtSdrdrByCP7qR?si=kVzKnsJUQ3quQLoFE8ss1g'])
